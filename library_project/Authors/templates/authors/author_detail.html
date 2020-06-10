@@ -15,7 +15,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">E-commerce</a>
+    <a class="navbar-brand" href="#">Library Managment System</a>
   </nav>
 
   <div class="container mt-3">
@@ -31,21 +31,22 @@
     </div>
 
     <!-- item -->
-    <div class="row mt-2">
-      {% for book in books %}
-      <div class="col-3 row justify-content-end mx-auto">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"> {{book.name}} </h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{book.status}}</h6>
-            <a href="{% url 'book_detail' pk=book.pk %}" class="card-link">View</a>
-            <a href="{% url 'book_delete' pk=book.pk %}" class="card-link">Delete</a>
-            <a href="{% url 'book_update' pk=book.pk %}" class="card-link">Update</a>
-          </div>
+    {% for book in books %}
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{book.name}} </h5>
+          <small class="text-muted">{{book.status}}</small>
         </div>
+        <small class="text-muted">{{book.author.name}}.</small>
+        <div class="d-flex w-100 justify-content-around">
+          <a href="{% url 'book_detail' pk=book.pk %}" class="card-link">View</a>
+          <a href="{% url 'book_delete' pk=book.pk %}" class="card-link">Delete</a>
+          <a href="{% url 'book_update' pk=book.pk %}" class="card-link">Update</a>
+        </div>
+      </a>
       </div>
-      {% endfor %}
-    </div>
+    {% endfor %}
 
   </div>
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render ,get_object_or_404
 from .models import Author 
 from Books.models import Book
 from django.views.generic import DetailView,DeleteView,UpdateView,CreateView
@@ -11,8 +11,11 @@ def authors(request):
     authors=myFilter.qs
     return render(request,'Authors/authors.html',{"authors":authors ,'myFilter':myFilter})
 
-class AuthorDetail(DetailView):
-    model=Author
+def author_detail(request,pk):
+    author=get_object_or_404(Author,pk=pk)
+    books=Book.objects.filter(author=author)
+    return render(request,'Authors/author_detail.html',{"author":author,"books":books})
+
 
 
 class AuthorDelete(DeleteView):
